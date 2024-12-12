@@ -1,0 +1,44 @@
+{% extends 'main.html'%}
+{% load static %}
+{% block content%}
+    <div class="banner">
+        Exclusive Offers on Trendy Clothes
+    </div>
+    <div class="categories">
+        <h2>Shop by Category</h2>
+        <div class="categories-grid">
+            <div class="category-card">
+                <img src="{% static 'men1.jpg'%}" alt="Men">
+                <h3>Men</h3>
+            </div>
+            <div class="category-card">
+                <img src="{% static 'women1.jpg'%}" alt="Women">
+                <h3>Women</h3>
+            </div>
+            <div class="category-card">
+                <img src="{% static 'kid.jpg'%}" alt="Kids">
+                <h3>Kids</h3>
+            </div>
+        </div>
+    </div>
+    <div class="featured-products">
+        <h2>Featured Products</h2>
+        <div class="products-grid">
+            <div class="product-card">
+                <img src="{% static 'shirt.jpg'%}" alt="Product 1">
+                <h3>Trendy Shirt</h3>
+                <p>Price: $25</p>
+            </div>
+            <div class="product-card">
+                <img src="{% static 'stylish.jpg'%}" alt="Product 2">
+                <h3>Stylish Dress</h3>
+                <p>Price: $40</p>
+            </div>
+            <div class="product-card">
+                <img src="{% static 'casual.jpg'%}" alt="Product 3">
+                <h3>Casual Jeans</h3>
+                <p>Price: $30</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

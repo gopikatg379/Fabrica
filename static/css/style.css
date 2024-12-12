@@ -1,0 +1,236 @@
+
+body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f9f9f9;
+    }
+
+    header {
+        position:fixed;
+        background-color: #ffffff;
+        width: 100%;
+        padding: 10px 20px;
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid #ddd;
+        z-index: 1000;
+    }
+
+    /* Brand Name */
+    .brand {
+        font-size: 24px;
+        font-weight: bold;
+        color: #F72C5B;
+    }
+
+    nav {
+        display: flex;
+        gap: 20px;
+        flex-grow: 1; /* Ensures nav takes available space */
+        justify-content: center; /* Centers the nav items */
+        margin-left:480px;
+    }
+
+    nav > .menu-item {
+        position: relative;
+    }
+
+    nav a {
+        text-decoration: none;
+        color: #333;
+        font-weight: bold;
+        padding: 10px;
+    }
+
+    nav a:hover {
+        color: #ff3366;
+    }
+    .menu-item{
+        display: flex;
+        gap: 20px; /* Adjust spacing between menu items */
+        justify-content: center; /* Center the menu items */
+        align-items: center;
+    }
+    /* Mega Menu */
+    .mega-menu {
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        display: none;
+        background-color: #ffffff;
+        border: 1px solid #ddd;
+        width: 1000px;
+        padding: 20px;
+        z-index: 1000;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transform-origin: top left;
+    }
+
+    .menu-item:hover .mega-menu {
+        display: flex; /* Show the dropdown when hovering */
+        flex-wrap: wrap;
+    }
+
+    .mega-menu-column {
+        flex: 1;
+        padding: 10px;
+    }
+
+    .mega-menu-column h4 {
+        margin-bottom: 10px;
+        color: #ff3366;
+    }
+
+    .mega-menu-column ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .mega-menu-column ul li {
+        margin: 5px 0;
+    }
+
+    .mega-menu-column ul li a {
+        text-decoration: none;
+        color: #333;
+        font-size: 14px;
+    }
+
+    .mega-menu-column ul li a:hover {
+        text-decoration: underline;
+    }
+    .nav-icons {
+        display: flex;
+        gap: 20px; /* Space between icons */
+        align-items: center;
+        justify-content: flex-end;
+        margin-left:480px;
+    }
+
+    .nav-icons a {
+        color: #333;
+        font-size: 24px; /* Icon size */
+        text-decoration: none;
+        transition: color 0.3s ease, transform 0.2s ease;
+    }
+
+    .nav-icons a:hover {
+       color: #ff3366; /* Change color on hover */
+       transform: scale(1.2); /* Enlarge slightly */
+    }
+    footer {
+        background-color: #333;
+        color: white;
+        text-align: center;
+        padding: 10px;
+        margin-top: 20px;
+    }
+    .banner {
+        background-image: url('../cart.jpg');
+        background-size: cover;
+        background-position: center;
+        height: 700px;
+        background-repeat: no-repeat;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-size: 2rem;
+        font-weight: bold;
+    }
+
+    .categories, .featured-products {
+        margin: 20px;
+    }
+
+    .categories h2, .featured-products h2 {
+        margin-bottom: 15px;
+    }
+
+    .categories-grid, .products-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+    }
+
+    .category-card, .product-card {
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background: white;
+        text-align: center;
+        padding: 15px;
+    }
+
+    .category-card img, .product-card img {
+        max-width: 100%;
+        border-radius: 5px;
+        height: 300px;
+        width: 200px;
+    }
+    /* Dropdown Container */
+/* Dropdown Container */
+.dropdown {
+    position: relative;
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0; /* Align dropdown to the right of the icon */
+    background-color: white;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    display: none; /* Hidden by default */
+    z-index: 1000;
+    width: 200px;
+    border-radius: 5px;
+}
+
+/* Show dropdown on hover */
+.dropdown:hover .dropdown-menu {
+    display: block; /* Display dropdown when hovering over the parent */
+}
+
+/* Dropdown Menu Items */
+.dropdown-menu p {
+    margin: 0 0 10px;
+    color: #333;
+}
+
+.dropdown-menu button.login-btn {
+    background-color: #ff3366;
+    color: white;
+    border: none;
+    padding: 8px 10px;
+    width: 100%;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.dropdown-menu button.login-btn:hover {
+    background-color: #e52e5c;
+}
+
+.dropdown-menu a {
+    text-decoration: none;
+    color: #333;
+    display: block;
+    margin: 5px 0;
+    font-size: 15px;
+}
+
+.dropdown-menu a:hover {
+    color: #ff3366;
+}
+
+.dropdown-menu hr {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin: 10px 0;
+}
