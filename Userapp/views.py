@@ -53,3 +53,6 @@ def add_wishlist(request, id):
         return redirect('/login')
 
 
+def view_more(request, id):
+    cloth_obj = Clothes.objects.get(cloth_id=id)
+    return render(request, 'view_more.html', {'data': cloth_obj})

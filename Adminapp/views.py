@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import *
 from Userapp.models import WishList
 
+
 # Create your views here.
 def register(request):
     if request.method == 'POST':
@@ -54,8 +55,8 @@ def home(request):
 def tshirt(request):
     if 'user_id' in request.session:
         sub_obj = Clothes.objects.filter(category=11)
-        reg_obj = Register.objects.get(register_id = request.session['user_id'])
+        reg_obj = Register.objects.get(register_id=request.session['user_id'])
         wishlist = WishList.objects.filter(user=reg_obj).values_list('cloth__cloth_id', flat=True)
-        return render(request, 'tshirt.html', {'data': sub_obj,'wishlist_ids':wishlist})
+        return render(request, 'tshirt.html', {'data': sub_obj, 'wishlist_ids': wishlist})
     else:
         return redirect('/login')

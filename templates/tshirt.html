@@ -9,7 +9,7 @@
                 <p class="card-text" style="text-align: center;">Price: {{ x.price }}/-</p>
             </div>
             <div class="card-footer d-flex justify-content-between align-items-center">
-                <button class="btn-view-more" style="margin-left:80px;">View More</button>
+                <button class="btn-view-more" style="margin-left:80px;"><a href="user/view/more/{{x.cloth_id}}" style="text-decoration:None;color:white;"> View More</a></button>
                 <div style="margin-right:40px;">
                     {% if x.cloth_id in wishlist_ids %}
                         <a href="/user/add/wishlist/{{ x.cloth_id }}" class="icon" style="color:#F72C5B;margin-right:10px;">

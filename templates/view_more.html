@@ -1,0 +1,14 @@
+{% extends 'main.html' %}
+{% block content %}
+<div style="padding-top:150px;">
+    <div class="card1">
+        <img src="{{data.image.url}}" alt="T Shirt">
+        <div class="card-content1">
+            <h2>{{data.name}}</h2>
+            <p>Price: {{data.price}}/-</p>
+            <p>{{data.description}}</p>
+            <button class="btn1">Buy Now</button>
+        </div>
+    </div>
+    </div>
+{% endblock %}
