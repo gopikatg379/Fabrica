@@ -4,5 +4,5 @@ urlpatterns = [
     path('register',views.register,name='register'),
     path('login',views.login,name='login'),
     path('',views.home,name='home'),
-    path('t-shirts',views.tshirt,name='tshirt'),
+    path('clothes/<int:id>',views.tshirt,name='tshirt'),
 ]

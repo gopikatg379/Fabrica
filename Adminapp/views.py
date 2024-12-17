@@ -52,11 +52,12 @@ def home(request):
     return render(request, 'user_home.html')
 
 
-def tshirt(request):
+def tshirt(request,id):
     if 'user_id' in request.session:
-        sub_obj = Clothes.objects.filter(category=11)
+        sub_obj = Clothes.objects.filter(sub_category=id)
         reg_obj = Register.objects.get(register_id=request.session['user_id'])
         wishlist = WishList.objects.filter(user=reg_obj).values_list('cloth__cloth_id', flat=True)
         return render(request, 'tshirt.html', {'data': sub_obj, 'wishlist_ids': wishlist})
     else:
         return redirect('/login')
+

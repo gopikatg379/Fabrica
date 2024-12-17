@@ -131,26 +131,19 @@ textarea {
             </div>
 
             <!-- Category -->
-            <div class="form-group">
-                <label for="category">Category</label>
-                <select id="category" name="category" class="form-control" required>
-                    <option value="" disabled selected>Select Category</option>
-                    {% for cat in category %}
-                        <option value="{{ cat.categoryCloth_id }}">{{ cat.CategoryCloth_name }}</option>
-                    {% endfor %}
-                </select>
-            </div>
+            <label for="category">Category:</label>
+            <select id="category" name="category">
+                <option value="">-- Select Category --</option>
+                {% for cat in category %}
+                <option value="{{ cat.categoryCloth_id }}">{{ cat.CategoryCloth_name }}</option>
+                {% endfor %}
+            </select>
 
-            <!-- Subcategory -->
-            <div class="form-group">
-                <label for="subcategory">Subcategory</label>
-                <select id="subcategory" name="subcategory" class="form-control" required>
-                    <option value="" disabled selected>Select Subcategory</option>
-                    {% for subcat in sub_category %}
-                        <option value="{{ subcat.category_id }}">{{ subcat.subcategory_name }}</option>
-                    {% endfor %}
-                </select>
-            </div>
+            <label for="subcategory">Subcategory:</label>
+            <select id="subcategory" name="subcategory" disabled>
+                <option value="">-- Select Subcategory --</option>
+            </select>
+
 
             <div class="form-group">
                 <label for="stock">Stock</label>
@@ -160,5 +153,31 @@ textarea {
             <button type="submit" class="btn btn-primary">Add Product</button>
         </form>
     </div>
+<script>
+    document.getElementById('category').addEventListener('change', function() {
+        const categoryId = this.value;
+        const subcategorySelect = document.getElementById('subcategory');
+
+        // Clear existing subcategories
+        subcategorySelect.innerHTML = '<option value="">-- Select Subcategory --</option>';
+        subcategorySelect.disabled = true;
+
+        if (categoryId) {
+            fetch(`/merchant/add?category_id=${categoryId}`)
+                .then(response => response.json())
+                .then(data => {
+                    data.subcategories.forEach(sub => {
+                        const option = document.createElement('option');
+                        option.value = sub.id;
+                        option.textContent = sub.name;
+                        subcategorySelect.appendChild(option);
+                    });
+                    subcategorySelect.disabled = false;
+                })
+                .catch(error => console.error('Error fetching subcategories:', error));
+        }
+    });
+</script>
 </body>
+
 </html>

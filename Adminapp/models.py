@@ -62,3 +62,17 @@ class Clothes(models.Model):
 
     class Meta:
         db_table = 'cloth_table'
+
+
+class Cart(models.Model):
+    cart_id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(Register, on_delete=models.CASCADE)
+    cloth = models.ForeignKey(Clothes, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1)
+
+    class Meta:
+        db_table = 'cart_table'
+
+    @property
+    def total_price(self):
+        return self.cloth.price * self.quantity
