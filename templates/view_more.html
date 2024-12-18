@@ -1,8 +1,14 @@
 {% extends 'main.html' %}
 {% block content %}
 <div style="padding-top:150px;">
-    <div class="card1" style="height:500px;">
-        <img src="{{data.image.url}}" alt="T Shirt">
+    <div class="card1" style="height:500px; display: flex; align-items: center;">
+        <img
+            src="{{data.image.url}}"
+            data-zoom-image="{{data.image.url}}"
+            id="zoomable-image"
+            alt="T Shirt"
+            style="width: 380px; height: 500px; margin-right: 20px;"
+        >
         <div class="card-content1">
             <h2>{{data.name}}</h2>
             <p>Price: {{data.price}}/-</p>
@@ -10,5 +16,17 @@
             <button class="btn1">Buy Now</button>
         </div>
     </div>
-    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        // Initialize ElevateZoom
+        $("#zoomable-image").elevateZoom({
+            zoomType: "lens",       // Options: window, lens, inner
+            lensShape: "round",     // Round zoom lens
+            lensSize: 200,          // Size of the zoom lens
+            cursor: "pointer"       // Change cursor to pointer on hover
+        });
+    });
+</script>
 {% endblock %}

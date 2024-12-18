@@ -61,7 +61,7 @@ def add_wishlist(request, id):
                 cloth=cloth_obj
             )
             wish_obj.save()
-            return redirect('/t-shirts')
+            return redirect('/user/home')
     else:
         return redirect('/login')
 
