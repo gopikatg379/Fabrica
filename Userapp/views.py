@@ -54,7 +54,7 @@ def add_wishlist(request, id):
         try:
             wish_obj = WishList.objects.get(cloth=cloth_obj)
             wish_obj.delete()
-            return redirect('/t-shirts')
+            return redirect('/user/home')
         except WishList.DoesNotExist:
             wish_obj = WishList(
                 user=user_id,
@@ -68,7 +68,10 @@ def add_wishlist(request, id):
 
 def view_more(request, id):
     cloth_obj = Clothes.objects.get(cloth_id=id)
-    return render(request, 'view_more.html', {'data': cloth_obj})
+    print(cloth_obj.size)
+    sizes = cloth_obj.size.all()
+    print(sizes)
+    return render(request, 'view_more.html', {'data': cloth_obj,'sizes': sizes})
 
 
 def add_cart(request, id):

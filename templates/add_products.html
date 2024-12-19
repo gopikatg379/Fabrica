@@ -130,14 +130,22 @@ textarea {
                 <input type="file" id="image" name="image" class="form-control" accept="image/*" required>
             </div>
 
+            <div class="form-group">
+                <label for="gender">Gender</label>
+                <select id="gender" name="gender">
+                    <option value="">-- Select Gender --</option>
+                    <option value="1">Male</option>
+                    <option value="2">Female</option>
+                    <option value="3">Kid</option>
+                </select>
+            </div>
             <!-- Category -->
-            <label for="category">Category:</label>
-            <select id="category" name="category">
-                <option value="">-- Select Category --</option>
-                {% for cat in category %}
-                <option value="{{ cat.categoryCloth_id }}">{{ cat.CategoryCloth_name }}</option>
-                {% endfor %}
-            </select>
+            <div class="form-group">
+                <label for="category">Category</label>
+                <select id="category" name="category" disabled>
+                    <option value="">-- Select Category --</option>
+                </select>
+            </div>
 
             <label for="subcategory">Subcategory:</label>
             <select id="subcategory" name="subcategory" disabled>
@@ -149,11 +157,48 @@ textarea {
                 <label for="stock">Stock</label>
                 <input type="number" id="stock" name="stock" class="form-control" step="0.01" required>
             </div>
+
+            <div class="form-group">
+            <label for="sizes">Available Sizes</label>
+            <div id="sizes">
+                {% for size in sizes %}
+                <div>
+                    <input type="checkbox" id="{{ size.id }}" name="sizes" value="{{ size.size_id }}">
+                    <label for="{{ size.id }}">{{ size.name }}</label>
+                </div>
+                {% endfor %}
+            </div>
             <!-- Submit Button -->
             <button type="submit" class="btn btn-primary">Add Product</button>
         </form>
     </div>
 <script>
+    document.getElementById('gender').addEventListener('change', function() {
+            const gender = this.value;
+            const categorySelect = document.getElementById('category');
+            const subcategorySelect = document.getElementById('subcategory');
+
+            // Clear existing options
+            categorySelect.innerHTML = '<option value="">-- Select Category --</option>';
+            subcategorySelect.innerHTML = '<option value="">-- Select Subcategory --</option>';
+            categorySelect.disabled = true;
+            subcategorySelect.disabled = true;
+
+            if (gender) {
+                fetch(`/merchant/add?gender=${gender}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        data.categories.forEach(cat => {
+                            const option = document.createElement('option');
+                            option.value = cat.id;
+                            option.textContent = cat.name;
+                            categorySelect.appendChild(option);
+                        });
+                        categorySelect.disabled = false;
+                    })
+                    .catch(error => console.error('Error fetching categories:', error));
+            }
+        });
     document.getElementById('category').addEventListener('change', function() {
         const categoryId = this.value;
         const subcategorySelect = document.getElementById('subcategory');

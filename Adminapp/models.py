@@ -13,6 +13,7 @@ class CategoryGender(models.Model):
 class CategoryCloth(models.Model):
     categoryCloth_id = models.AutoField(primary_key=True)
     CategoryCloth_name = models.CharField(max_length=255)
+    categoryGender = models.ForeignKey(CategoryGender, on_delete=models.CASCADE,null=True)
 
     class Meta:
         db_table = 'category_cloth_table'
@@ -34,6 +35,14 @@ class CategoryUser(models.Model):
 
     class Meta:
         db_table = 'category_user_table'
+
+
+class Sizes(models.Model):
+    size_id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=50)
+
+    class Meta:
+        db_table = 'sizes_table'
 
 
 class Register(models.Model):
@@ -59,6 +68,7 @@ class Clothes(models.Model):
     category = models.ForeignKey(CategoryCloth, on_delete=models.CASCADE)
     sub_category = models.ForeignKey(SubCategoryCloth, on_delete=models.CASCADE, null=True)
     stock = models.IntegerField()
+    size = models.ManyToManyField(Sizes)
 
     class Meta:
         db_table = 'cloth_table'
