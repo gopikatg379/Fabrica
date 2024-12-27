@@ -13,7 +13,7 @@ class CategoryGender(models.Model):
 class CategoryCloth(models.Model):
     categoryCloth_id = models.AutoField(primary_key=True)
     CategoryCloth_name = models.CharField(max_length=255)
-    categoryGender = models.ForeignKey(CategoryGender, on_delete=models.CASCADE,null=True)
+    categoryGender = models.ManyToManyField(CategoryGender)
 
     class Meta:
         db_table = 'category_cloth_table'
@@ -21,7 +21,6 @@ class CategoryCloth(models.Model):
 
 class SubCategoryCloth(models.Model):
     category_id = models.AutoField(primary_key=True)
-    category_gender = models.ForeignKey(CategoryGender, on_delete=models.CASCADE, null=True)
     subcategory = models.ForeignKey(CategoryCloth, on_delete=models.CASCADE, null=True)
     subcategory_name = models.CharField(max_length=255)
 
@@ -61,6 +60,7 @@ class Register(models.Model):
 
 class Clothes(models.Model):
     cloth_id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(Register, on_delete=models.CASCADE,null=True)
     name = models.CharField(max_length=255)
     price = models.IntegerField()
     description = models.TextField()
@@ -86,3 +86,6 @@ class Cart(models.Model):
     @property
     def total_price(self):
         return self.cloth.price * self.quantity
+
+
+

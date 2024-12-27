@@ -79,7 +79,7 @@ WSGI_APPLICATION = 'ClothShop.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'clothshop',
+        'NAME': 'clothshopnew',
         'USER': 'root',
         'PASSWORD': 'gop1999ika',
         'HOST': 'localhost',

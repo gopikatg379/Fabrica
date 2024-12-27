@@ -57,7 +57,7 @@ def tshirt(request,id):
         sub_obj = Clothes.objects.filter(sub_category=id)
         reg_obj = Register.objects.get(register_id=request.session['user_id'])
         wishlist = WishList.objects.filter(user=reg_obj).values_list('cloth__cloth_id', flat=True)
-        return render(request, 'tshirt.html', {'data': sub_obj, 'wishlist_ids': wishlist})
+        return render(request, 'tshirt.html', {'data': sub_obj, 'wishlist_ids': wishlist,'user':reg_obj})
     else:
         return redirect('/login')
 
