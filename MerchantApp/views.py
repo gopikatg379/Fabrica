@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from Adminapp.models import Clothes, CategoryCloth, SubCategoryCloth,Sizes,Register
-from django.http import JsonResponse
-
+from django.http import HttpResponse,JsonResponse
+from django.contrib import messages
+from django.core.paginator import Paginator
 
 # Create your views here.
 def merchant_home(request):
@@ -9,16 +10,23 @@ def merchant_home(request):
         user_id = request.session['user_id']
         user = Register.objects.get(register_id=user_id)
         clothes = Clothes.objects.filter(user=user)
-        return render(request, 'merchant_home.html', {'user': user,'cloth':clothes})
+
+        paginator = Paginator(clothes, 6)
+        page_number = request.GET.get('page')
+        clothes_page = paginator.get_page(page_number)
+
+        return render(request, 'merchant_home.html', {'user': user,'cloth':clothes_page})
     else:
         return redirect('/')
 
 
 def add_products(request):
     if 'user_id' in request.session:
+        user = Register.objects.get(register_id=request.session['user_id'])
+        if user.categoryUser.categoryUser_name != 'Merchant':
+            messages.error(request, 'You do not have permission to add products.')
+            return redirect('/user/home')
         if request.method == 'POST':
-            # Retrieve form data
-            user = Register.objects.get(register_id=request.session['user_id'])
             name = request.POST.get('name')
             price = request.POST.get('price')
             description = request.POST.get('description')

@@ -44,7 +44,7 @@ def login(request):
                 request.session['user_id'] = user.register_id
                 return redirect('merchant/home')
         except Register.DoesNotExist:
-            return render(request, 'login.html', {'error': 'Invalid email or password'})
+            return render(request, 'login.html', {'error': 'Invalid username or password'})
     return render(request, 'login.html')
 
 
@@ -60,4 +60,3 @@ def tshirt(request,id):
         return render(request, 'tshirt.html', {'data': sub_obj, 'wishlist_ids': wishlist,'user':reg_obj})
     else:
         return redirect('/login')
-

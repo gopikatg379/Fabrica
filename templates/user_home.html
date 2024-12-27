@@ -1,6 +1,13 @@
 {% extends 'main.html'%}
 {% load static %}
 {% block content%}
+{% if messages %}
+    <script type="text/javascript">
+        {% for message in messages %}
+            alert("{{ message }}");
+        {% endfor %}
+    </script>
+{% endif %}
     <div class="banner">
         Exclusive Offers on Trendy Clothes
     </div>

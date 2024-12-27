@@ -68,9 +68,7 @@ def add_wishlist(request, id):
 
 def view_more(request, id):
     cloth_obj = Clothes.objects.get(cloth_id=id)
-    print(cloth_obj.size)
     sizes = cloth_obj.size.all()
-    print(sizes)
     return render(request, 'view_more.html', {'data': cloth_obj,'sizes': sizes})
 
 
