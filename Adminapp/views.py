@@ -6,14 +6,12 @@ from Userapp.models import WishList
 # Create your views here.
 def register(request):
     if request.method == 'POST':
-        print(request.POST)
         username = request.POST['username']
         phone = request.POST['phone']
         email = request.POST['email']
         password = request.POST['password']
         address = request.POST['address']
         category = CategoryUser.objects.get(categoryUser_id=request.POST['category'])
-        print(category)
         image = request.FILES['profile_image']
         user = Register(
             name=username,
@@ -32,7 +30,6 @@ def register(request):
 
 def login(request):
     if request.method == 'POST':
-        print(request.POST)
         username = request.POST['username']
         password = request.POST['password']
         try:
@@ -52,11 +49,20 @@ def home(request):
     return render(request, 'user_home.html')
 
 
-def tshirt(request,id):
+def tshirt(request, id):
     if 'user_id' in request.session:
         sub_obj = Clothes.objects.filter(sub_category=id)
         reg_obj = Register.objects.get(register_id=request.session['user_id'])
         wishlist = WishList.objects.filter(user=reg_obj).values_list('cloth__cloth_id', flat=True)
-        return render(request, 'tshirt.html', {'data': sub_obj, 'wishlist_ids': wishlist,'user':reg_obj})
+        return render(request, 'tshirt.html', {'data': sub_obj, 'wishlist_ids': wishlist, 'user': reg_obj})
+    else:
+        return redirect('/login')
+
+
+def men_dress(request,id):
+    if 'user_id' in request.session:
+        sub_obj = Clothes.objects.filter(sub_category__subcategory__categoryGender=id)
+        reg_obj = Register.objects.get(register_id=request.session['user_id'])
+        return render(request, 'tshirt.html', {'data': sub_obj, 'user': reg_obj})
     else:
         return redirect('/login')

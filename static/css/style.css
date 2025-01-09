@@ -223,6 +223,7 @@ body {
     display: block;
     margin: 5px 0;
     font-size: 15px;
+    padding-left:20px;
 }
 
 .dropdown-menu a:hover {

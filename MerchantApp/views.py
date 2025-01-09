@@ -34,7 +34,6 @@ def add_products(request):
             category_id = request.POST.get('category')
             subcategory_id = request.POST.get('subcategory')
             stock = request.POST.get('stock')
-            gender = request.POST.get('gender')
 
             # Fetch category object
             try:
@@ -94,7 +93,23 @@ def add_products(request):
         return redirect('/')
 
 
+def delete_product(request,id):
+    if 'user_id' in request.session:
+        user_id = request.session['user_id']
+        user = Register.objects.get(register_id=user_id)
+        if user.categoryUser.categoryUser_name!= 'Merchant':
+            messages.error(request, 'You do not have permission to delete products.')
+            return redirect('/user/home')
 
+        try:
+            cloth = Clothes.objects.get(cloth_id=id)
+            cloth.delete()
+            messages.success(request, 'Product deleted successfully.')
+        except Clothes.DoesNotExist:
+            messages.error(request, 'Product not found.')
 
+        return redirect('/merchant/home')
+    else:
+        return redirect('/login')
 
 

@@ -67,9 +67,12 @@ def add_wishlist(request, id):
 
 
 def view_more(request, id):
-    cloth_obj = Clothes.objects.get(cloth_id=id)
-    sizes = cloth_obj.size.all()
-    return render(request, 'view_more.html', {'data': cloth_obj,'sizes': sizes})
+    if 'user_id' in request.session:
+        user = Register.objects.get(register_id=request.session['user_id'])
+        cloth_obj = Clothes.objects.get(cloth_id=id)
+        return render(request, 'view_more.html', {'data': cloth_obj,'user':user})
+    else:
+        return redirect('/login')
 
 
 def add_cart(request, id):
