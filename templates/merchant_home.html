@@ -153,7 +153,7 @@
                                 </li>
                             {% endif %}
                             {% for page_num in cloth.paginator.page_range %}
-                                <li class="page-item {% if cloth.number == page_num %}active{% endif %}">
+                                  <li class="page-item {% if cloth.number == page_num %}active{% endif %}">
                                     <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a>
                                 </li>
                             {% endfor %}

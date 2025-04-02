@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
+
+import dj_database_url
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -25,7 +28,7 @@ SECRET_KEY = 'django-insecure-%o1)d*mg0+1$rtm9_5_1^9q_aao)ki)tj$!74)9f1xaw5qjhd8
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -77,18 +80,10 @@ WSGI_APPLICATION = 'ClothShop.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'clothshopnew',
-        'USER': 'root',
-        'PASSWORD': 'gop1999ika',
-        'HOST': 'localhost',
-        'PORT': '3306',
-        'OPTIONS': {
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
-        }
-
-    } 
+    'default': dj_database_url.parse(
+        "mysql://root:hjogsWKKiHrFpSgUYsaOrQsZkqjxOkDg@ballast.proxy.rlwy.net:56694/railway",
+        conn_max_age=600
+    )
 }
 
 # Password validation
